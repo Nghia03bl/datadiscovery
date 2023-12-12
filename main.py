@@ -7,18 +7,18 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import io
 
-st.title('Data exploration')
+st.title('Khám phá dữ liệu')
 
-st.header('Upload a dataset')
-uploaded_file = st.file_uploader("Choose a .csv file", type=(['csv']))
+st.header('Tải lên bộ dữ liệu')
+uploaded_file = st.file_uploader("Chọn 1 file .csv", type=(['csv']))
 
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
 
-    st.header('Show data')
+    st.header('Hiển thị data')
     st.dataframe(df)
 
-    st.header('Describe attributes')
+    st.header('Mô tả')
     st.table(df.describe())
 
     st.header('Show variables\' information')
@@ -27,7 +27,7 @@ if uploaded_file is not None:
     s = buffer.getvalue()
     st.text(s)
 
-    st.header('Visualize each variable')
+    st.header('Trực quan hóa từng biến')
     for col in list(df.columns):
         fig, ax = plt.subplots()
         ax.hist(df[col], bins=20)
@@ -35,14 +35,14 @@ if uploaded_file is not None:
         plt.ylabel('Quantity')
         st.pyplot(fig)
 
-    st.header('Show correlation between variables')
+    st.header('Hiển thị mối tương quan giữa các biến')
     fig, ax = plt.subplots()
     sns.heatmap(df.corr(method='pearson'), ax=ax, vmax=1,square=True, annot=True, cmap='Reds')
     st.write(fig)
 
-    depend_var = st.radio('Choose dependent variable', df.columns)
+    depend_var = st.radio('Chọn biến phụ thuộc', df.columns)
 
-    st.header('Show relationship between variables')
+    st.header('Hiển thị quan hệ giữ các biến')
     for col in list(df.columns):
         if col != depend_var:
             fig, ax = plt.subplots()
