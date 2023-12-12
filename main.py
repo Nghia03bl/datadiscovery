@@ -6,6 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import io
+background_image = 'data-discovery-tools.png'
 
 st.title('Khám phá dữ liệu')
 
